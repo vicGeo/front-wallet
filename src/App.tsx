@@ -1,6 +1,7 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useMemo } from 'react';
 import { IDataWallet } from './interfaces/IDataWallet/IDataWallet';
 import axios from 'axios';
+import WalletContext from './context';
 
 function App() {
   const [data, setData] = useState<IDataWallet>({} as IDataWallet);
@@ -16,8 +17,33 @@ function App() {
     fetchData();
   }, []);
 
+  const contextValues = useMemo(() => ({
+    data, setData
+  }), [data, setData])
+
+  const handletest = () => {
+    const newMovements = {
+      id: data.movements.length + 1,
+      amount: 2000,
+      concept: 1,
+      date: new Date(),
+      order: 'prueba',
+    };
+    setData((prevData) => ({
+      ...prevData,
+      movements: [...prevData.movements, newMovements],
+    }));
+  };
+
   return (
-    <main className='grid place-items-center'>{JSON.stringify(data)}</main>
+    <WalletContext.Provider value={contextValues}>
+    <main className='grid place-items-center'>
+      {JSON.stringify(data)}
+      <section>
+        <button onClick={handletest}>Prueba</button>
+      </section>
+    </main>
+    </WalletContext.Provider>
   );
 }
 
