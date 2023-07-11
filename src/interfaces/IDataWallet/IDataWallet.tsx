@@ -1,6 +1,13 @@
 import { IMovement } from '../IMovement/IMovement';
 
-export interface IDataWallet {
+interface IDataWallet {
   balance: number;
   movements: IMovement[];
 }
+
+type IDataWalletGet = Promise<IDataWallet>;
+
+export type {
+  IDataWalletGet,
+  IDataWallet
+};
