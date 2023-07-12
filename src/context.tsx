@@ -8,4 +8,4 @@ interface IWalletContext {
 
 const WalletContext = createContext<IWalletContext>({} as IWalletContext);
 
-export default WalletContext;
+export { WalletContext };

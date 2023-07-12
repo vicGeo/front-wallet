@@ -1,12 +1,18 @@
 import { useState, useEffect, useMemo } from 'react';
 import { IDataWallet } from './interfaces/IDataWallet/IDataWallet';
 import axios from 'axios';
-import WalletContext from './context';
 import { isEmpty } from 'lodash';
 import { WalletTable } from './components/WalletTable';
 import 'primereact/resources/themes/tailwind-light/theme.css'; // theme
 import 'primereact/resources/primereact.css'; // core css
 import 'primeicons/primeicons.css';
+import { WalletContext } from './context';
+import {
+  enumConcept,
+  formatFullDate,
+  formatNumber,
+  randomOrder,
+} from './utils';
 
 function App() {
   const [data, setData] = useState<IDataWallet>({} as IDataWallet);
@@ -38,9 +44,9 @@ function App() {
         {
           id: data.movements.length + 1,
           amount: 50,
-          concept: 0,
-          date: '2023-05-17 04:56:24',
-          order: 'pedido',
+          concept: enumConcept.INGRESO,
+          date: formatFullDate(new Date(Date.now()).toLocaleString()),
+          order: randomOrder(),
           prevBalance: data.balance,
           actualBalance: data.balance + 50,
         },
@@ -56,9 +62,9 @@ function App() {
         {
           id: data.movements.length + 1,
           amount: 50,
-          concept: 1,
-          date: '2023-07-12 19:56:24',
-          order: 'pedido',
+          concept: enumConcept.RETIRADA,
+          date: formatFullDate(new Date(Date.now()).toLocaleString()),
+          order: randomOrder(),
           prevBalance: data.balance,
           actualBalance: data.balance - 50,
         },
@@ -73,7 +79,7 @@ function App() {
         <section className='flex items-center justify-center'>
           <div className='flex flex-col gap-4'>
             <p className='flex items-center justify-center text-2xl font-medium'>
-              {data.balance}
+              {formatNumber(data.balance)}
             </p>
             <div className='flex gap-4'>
               <button
