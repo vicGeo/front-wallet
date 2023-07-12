@@ -1,7 +1,6 @@
-import { useState } from 'react';
+import { useState, useContext} from 'react';
 import { DataTable } from 'primereact/datatable';
 import { Column } from 'primereact/column';
-import { useContext } from 'react';
 import { InputText } from 'primereact/inputtext';
 import { FilterMatchMode } from 'primereact/api';
 import { WalletContext } from '../../context';
@@ -105,7 +104,11 @@ const WalletTable = () => {
       filterDisplay='row'
       header={header}
     >
-      <Column field='order' header='PEDIDO' body={orderBodyTemplate}></Column>
+      <Column
+        field='order'
+        header='N° PEDIDO'
+        body={orderBodyTemplate}
+      ></Column>
       <Column
         field='date'
         header='FECHA'

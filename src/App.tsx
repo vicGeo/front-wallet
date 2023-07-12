@@ -13,6 +13,7 @@ import {
   formatNumber,
   randomOrder,
 } from './utils';
+import { Header } from './components/Header';
 
 function App() {
   const [data, setData] = useState<IDataWallet>({} as IDataWallet);
@@ -45,7 +46,7 @@ function App() {
           id: data.movements.length + 1,
           amount: 50,
           concept: enumConcept.INGRESO,
-          date: formatFullDate(new Date(Date.now()).toLocaleString()),
+          date: formatFullDate(new Date(Date.now()).toLocaleString('es-ES')),
           order: randomOrder(),
           prevBalance: data.balance,
           actualBalance: data.balance + 50,
@@ -63,7 +64,7 @@ function App() {
           id: data.movements.length + 1,
           amount: 50,
           concept: enumConcept.RETIRADA,
-          date: formatFullDate(new Date(Date.now()).toLocaleString()),
+          date: formatFullDate(new Date(Date.now()).toLocaleString('es-ES')),
           order: randomOrder(),
           prevBalance: data.balance,
           actualBalance: data.balance - 50,
@@ -75,28 +76,8 @@ function App() {
 
   return (
     <WalletContext.Provider value={contextValues}>
-      <main className='grid place-items-center gap-4'>
-        <section className='flex items-center justify-center'>
-          <div className='flex flex-col gap-4'>
-            <p className='flex items-center justify-center text-2xl font-medium'>
-              {formatNumber(data.balance)}
-            </p>
-            <div className='flex gap-4'>
-              <button
-                onClick={() => handleIngresar()}
-                className='bg-[#FFCE33] text-black font-medium py-2 px-4 rounded'
-              >
-                Ingresar fondos
-              </button>
-              <button
-                onClick={() => handleRetirar()}
-                className='bg-[#0072CA]  text-white font-medium py-2 px-4 rounded'
-              >
-                Retirar fondos
-              </button>
-            </div>
-          </div>
-        </section>
+      <main className='container mx-auto px-4 gap-4'>
+        <Header />
         <WalletTable />
       </main>
     </WalletContext.Provider>
