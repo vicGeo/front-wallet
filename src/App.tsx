@@ -2,6 +2,11 @@ import { useState, useEffect, useMemo } from 'react';
 import { IDataWallet } from './interfaces/IDataWallet/IDataWallet';
 import axios from 'axios';
 import WalletContext from './context';
+import { isEmpty } from 'lodash';
+import { WalletTable } from './components/WalletTable';
+import 'primereact/resources/themes/tailwind-light/theme.css'; // theme
+import 'primereact/resources/primereact.css'; // core css
+import 'primeicons/primeicons.css';
 
 function App() {
   const [data, setData] = useState<IDataWallet>({} as IDataWallet);
@@ -14,8 +19,8 @@ function App() {
   };
 
   useEffect(() => {
-    fetchData();
-  }, []);
+    isEmpty(data) && fetchData();
+  }, [data]);
 
   const contextValues = useMemo(
     () => ({
@@ -34,7 +39,7 @@ function App() {
           id: data.movements.length + 1,
           amount: 50,
           concept: 0,
-          date: new Date(),
+          date: '2023-05-17 04:56:24',
           order: 'pedido',
           prevBalance: data.balance,
           actualBalance: data.balance + 50,
@@ -52,7 +57,7 @@ function App() {
           id: data.movements.length + 1,
           amount: 50,
           concept: 1,
-          date: new Date(),
+          date: '2023-07-12 19:56:24',
           order: 'pedido',
           prevBalance: data.balance,
           actualBalance: data.balance - 50,
@@ -64,7 +69,7 @@ function App() {
 
   return (
     <WalletContext.Provider value={contextValues}>
-      <main className='grid place-items-center'>
+      <main className='grid place-items-center gap-4'>
         <section className='flex items-center justify-center'>
           <div className='flex flex-col gap-4'>
             <p className='flex items-center justify-center text-2xl font-medium'>
@@ -73,19 +78,20 @@ function App() {
             <div className='flex gap-4'>
               <button
                 onClick={() => handleIngresar()}
-                className='bg-yellow-400 hover:bg-yellow-500 text-black font-medium py-2 px-4 rounded'
+                className='bg-[#FFCE33] text-black font-medium py-2 px-4 rounded'
               >
                 Ingresar fondos
               </button>
               <button
                 onClick={() => handleRetirar()}
-                className='bg-blue-400 hover:bg-blue-500 text-white font-medium py-2 px-4 rounded'
+                className='bg-[#0072CA]  text-white font-medium py-2 px-4 rounded'
               >
                 Retirar fondos
               </button>
             </div>
           </div>
         </section>
+        <WalletTable />
       </main>
     </WalletContext.Provider>
   );
