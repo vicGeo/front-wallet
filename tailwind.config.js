@@ -20,6 +20,7 @@ export const theme = {
     emerald: colors.emerald,
     indigo: colors.indigo,
     yellow: colors.yellow,
+    red: colors.red
   },
 };
 export const plugins = [];

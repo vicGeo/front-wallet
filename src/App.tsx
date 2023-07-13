@@ -3,16 +3,10 @@ import { IDataWallet } from './interfaces/IDataWallet/IDataWallet';
 import axios from 'axios';
 import { isEmpty } from 'lodash';
 import { WalletTable } from './components/WalletTable';
-import 'primereact/resources/themes/tailwind-light/theme.css'; // theme
-import 'primereact/resources/primereact.css'; // core css
+import 'primereact/resources/themes/tailwind-light/theme.css';
+import 'primereact/resources/primereact.css';
 import 'primeicons/primeicons.css';
 import { WalletContext } from './context';
-import {
-  enumConcept,
-  formatFullDate,
-  formatNumber,
-  randomOrder,
-} from './utils';
 import { Header } from './components/Header';
 
 function App() {
@@ -36,43 +30,6 @@ function App() {
     }),
     [data, setData]
   );
-
-  const handleIngresar = () => {
-    const newData = {
-      balance: data.balance + 50,
-      movements: [
-        ...data.movements,
-        {
-          id: data.movements.length + 1,
-          amount: 50,
-          concept: enumConcept.INGRESO,
-          date: formatFullDate(new Date(Date.now()).toLocaleString('es-ES')),
-          order: randomOrder(),
-          prevBalance: data.balance,
-          actualBalance: data.balance + 50,
-        },
-      ],
-    };
-    setData(newData);
-  };
-  const handleRetirar = () => {
-    const newData = {
-      balance: data.balance - 50,
-      movements: [
-        ...data.movements,
-        {
-          id: data.movements.length + 1,
-          amount: 50,
-          concept: enumConcept.RETIRADA,
-          date: formatFullDate(new Date(Date.now()).toLocaleString('es-ES')),
-          order: randomOrder(),
-          prevBalance: data.balance,
-          actualBalance: data.balance - 50,
-        },
-      ],
-    };
-    setData(newData);
-  };
 
   return (
     <WalletContext.Provider value={contextValues}>

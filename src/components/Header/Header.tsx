@@ -5,6 +5,8 @@ import { WalletContext } from '../../context';
 import { formatNumber } from '../../utils';
 import { Fondos } from '../Fondos';
 import { Dialog } from 'primereact/dialog';
+import { ContentDeposit } from '../ContentDeposit';
+import { ContentWithDraw } from '../ContentWithDraw';
 
 const Header = () => {
   const { data } = useContext(WalletContext);
@@ -41,22 +43,20 @@ const Header = () => {
       <Dialog
         header='Ingresar fondos'
         visible={showModalDeposit}
-        style={{ width: '30vw' }}
+        style={{ width: '25rem' }}
         onHide={() => setShowModalDeposit(false)}
+        draggable={false}
       >
-        <p className='m-0'>
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-        </p>
+        <ContentDeposit setShowModalDeposit={setShowModalDeposit} />
       </Dialog>
       <Dialog
         header='Retirar fondos'
         visible={showModalWithdraw}
-        style={{ width: '30vw' }}
+        style={{ width: '25rem' }}
         onHide={() => setShowModalWithdraw(false)}
+        draggable={false}
       >
-        <p className='m-0'>
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-        </p>
+        <ContentWithDraw setShowModalWithdraw={setShowModalWithdraw} />
       </Dialog>
     </>
   );
