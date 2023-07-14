@@ -5,6 +5,7 @@ import { WalletContext } from '../../context';
 import { ErrorMessage } from '@hookform/error-message';
 import { classNames } from 'primereact/utils';
 import { enumConcept, formatFullDate, randomOrder } from '../../utils';
+import toast from 'react-hot-toast';
 
 interface Props {
   setShowModalDeposit: Dispatch<SetStateAction<boolean>>;
@@ -34,6 +35,7 @@ const ContentDeposit = ({ setShowModalDeposit }: Props) => {
     setData(newData);
     setShowModalDeposit(false);
     rhForm.reset();
+    toast.success('¡Ingreso realizado correctamente!');
   };
 
   return (
@@ -51,7 +53,9 @@ const ContentDeposit = ({ setShowModalDeposit }: Props) => {
           render={({ field, fieldState }) => (
             <>
               <label htmlFor={field.name} className='font-bold block mb-2'>
-                Ingreso
+                <small className='text-gray-400'>
+                  Para añadir el importe pulse la tecla "enter"
+                </small>
               </label>
               <InputNumber
                 id={field.name}

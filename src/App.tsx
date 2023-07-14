@@ -8,6 +8,7 @@ import 'primereact/resources/primereact.css';
 import 'primeicons/primeicons.css';
 import { WalletContext } from './context';
 import { Header } from './components/Header';
+import { Toaster } from 'react-hot-toast';
 
 function App() {
   const [data, setData] = useState<IDataWallet>({} as IDataWallet);
@@ -34,6 +35,7 @@ function App() {
   return (
     <WalletContext.Provider value={contextValues}>
       <main className='container mx-auto px-4 gap-4'>
+        <Toaster position='top-center' reverseOrder={false} />
         <Header />
         <WalletTable />
       </main>

@@ -5,6 +5,7 @@ import { WalletContext } from '../../context';
 import { ErrorMessage } from '@hookform/error-message';
 import { classNames } from 'primereact/utils';
 import { enumConcept, formatFullDate, randomOrder } from '../../utils';
+import toast from 'react-hot-toast';
 
 interface Props {
   setShowModalWithdraw: Dispatch<SetStateAction<boolean>>;
@@ -41,6 +42,7 @@ const ContentWithDraw = ({ setShowModalWithdraw }: Props) => {
     setData(newData);
     setShowModalWithdraw(false);
     rhForm.reset();
+    toast.success('Retirada realizada correctamente!');
   };
 
   return (
@@ -58,7 +60,9 @@ const ContentWithDraw = ({ setShowModalWithdraw }: Props) => {
           render={({ field, fieldState }) => (
             <>
               <label htmlFor={field.name} className='font-bold block mb-2'>
-                Retirada
+                <small className='text-gray-400'>
+                  Para añadir el importe pulse la tecla "enter"
+                </small>
               </label>
               <InputNumber
                 id={field.name}
